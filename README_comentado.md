@@ -88,8 +88,7 @@ O objetivo é fornecer uma base sólida, escalável e flexível, adequada para a
 - Papéis padrão existentes:
     - `platform_owner` – representa os donos da plataforma.
     - `support_agent` – representa a equipe de suporte.
-- Para conceder ou revogar acesso administrativo, adiciona-se ou remove-se a associação na `platform_role_user` (ou atualiza-se `is_active`).
-- Não existe mais whitelist de e-mails; todo controle é feito exclusivamente via banco.
+- Para conceder ou revogar acesso administrativo, adiciona-se ou remove-se a associação na `platform_role_user` (ou atualiza-se `is_active`), que centraliza todas as autorizações.
 
 ---
 

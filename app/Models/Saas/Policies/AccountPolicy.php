@@ -8,7 +8,7 @@ use App\Models\User;
 class AccountPolicy
 {
     /**
-     * Verifica se o usuário possui o papel de dono da plataforma.
+     * Verifica se o usuário possui o `PlatformRole` "platform_owner".
      */
     protected function isPlatformOwner(User $user): bool
     {

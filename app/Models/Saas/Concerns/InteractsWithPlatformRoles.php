@@ -6,6 +6,9 @@ use App\Models\Saas\PlatformRole;
 use App\Models\Saas\PlatformRoleUser;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * Fornece helpers para gerenciar `PlatformRole` associados ao usuário.
+ */
 trait InteractsWithPlatformRoles
 {
     protected ?array $cachedPlatformRoleSlugs = null;

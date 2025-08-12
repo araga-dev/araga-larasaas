@@ -78,7 +78,7 @@ O objetivo é fornecer uma base sólida, escalável e flexível, adequada para a
 - Papéis padrão:
   - `platform_owner` – define os donos da plataforma.
   - `support_agent` – identifica membros da equipe de suporte.
-- Atribuição ou remoção de papéis para administradores ocorre adicionando ou removendo registros em `platform_role_user` (ou marcando `is_active = 0`); não há controle por e-mails, apenas via banco.
+ - Atribuição ou remoção de papéis para administradores ocorre adicionando ou removendo registros em `platform_role_user` (ou marcando `is_active = 0`), centralizando toda a autorização no banco de dados.
 
 ---
 

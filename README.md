@@ -182,6 +182,11 @@ O objetivo é fornecer uma base sólida, escalável e flexível, adequada para a
 2. **Testes**
    - Estrutura de testes será definida conforme módulos evoluírem.
    - Testes unitários e de integração são obrigatórios para módulos críticos.
+   - Para executar a suíte de testes, certifique-se de ter o `.env` configurado com um `APP_KEY` válido e rode:
+
+     ```bash
+     php artisan test
+     ```
 
 3. **Configurações centrais**
    - Multi-tenancy: definido no provider principal.

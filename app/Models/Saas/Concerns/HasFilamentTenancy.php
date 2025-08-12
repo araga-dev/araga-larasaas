@@ -56,7 +56,6 @@ trait HasFilamentTenancy
 
         if ($panelId === 'saas') {
             if (method_exists($this, 'hasAnyPlatformRole')) {
-                // Ajuste a lista conforme seus papéis de plataforma
                 return $this->hasAnyPlatformRole([
                     'platform_owner',
                     'support_agent',

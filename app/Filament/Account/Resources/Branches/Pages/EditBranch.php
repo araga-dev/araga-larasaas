@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Branches\Pages;
+namespace App\Filament\Account\Resources\Branches\Pages;
 
-use App\Filament\Admin\Resources\Branches\BranchResource;
+use App\Filament\Account\Resources\Branches\BranchResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;

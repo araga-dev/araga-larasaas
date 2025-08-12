@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Branches\Tables;
+namespace App\Filament\Account\Resources\Branches\Tables;
 
-use App\Models\Branch;
+use App\Models\Saas\Branch;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;

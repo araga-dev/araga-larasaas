@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Pages\Tenancy;
+namespace App\Filament\Account\Pages\Tenancy;
 
 use Filament\Pages\Tenancy\EditTenantProfile;
 use Filament\Forms\Components\TextInput;

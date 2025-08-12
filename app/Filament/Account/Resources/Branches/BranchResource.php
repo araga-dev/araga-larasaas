@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Admin\Resources\Branches;
+namespace App\Filament\Account\Resources\Branches;
 
-use App\Filament\Admin\Resources\Branches\Pages\CreateBranch;
-use App\Filament\Admin\Resources\Branches\Pages\EditBranch;
-use App\Filament\Admin\Resources\Branches\Pages\ListBranches;
-use App\Filament\Admin\Resources\Branches\Schemas\BranchForm;
-use App\Filament\Admin\Resources\Branches\Tables\BranchesTable;
-use App\Models\Branch;
+use App\Filament\Account\Resources\Branches\Pages\CreateBranch;
+use App\Filament\Account\Resources\Branches\Pages\EditBranch;
+use App\Filament\Account\Resources\Branches\Pages\ListBranches;
+use App\Filament\Account\Resources\Branches\Schemas\BranchForm;
+use App\Filament\Account\Resources\Branches\Tables\BranchesTable;
+use App\Models\Saas\Branch;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;

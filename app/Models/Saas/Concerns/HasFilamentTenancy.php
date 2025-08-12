@@ -8,7 +8,6 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-
 /**
  * Plug-and-play tenancy para Filament 4.
  *
@@ -21,8 +20,7 @@ use Illuminate\Support\Collection;
  *
  * Comportamento:
  * - canAccessPanel(): decide acesso aos painéis do Filament.
- *   - Painel 'saas' (plataforma): acesso exclusivo por papéis de plataforma
- *     (requer trait HasPlatformRoles).
+ *   - Painel 'saas' (plataforma): liberado por papéis de plataforma.
  *   - Painéis tenant (admin, comercial, financeiro, producao): liberados aqui;
  *     a verificação real ocorre em canAccessTenant().
  *
@@ -31,23 +29,25 @@ use Illuminate\Support\Collection;
  *   se o pivot tiver 'panels' (JSON), o painel atual deve estar permitido.
  *
  * Observações:
- * - Este trait delega o acesso ao painel /saas para helpers de papéis de plataforma
- *   fornecidos por HasPlatformRoles. Sem esse trait, o método retornará false.
+ * - Caso o User possua o trait HasPlatformRoles, este trait usará
+ *   hasAnyPlatformRole([...]) para liberar o /saas.
+ * - Sem esse trait, o painel 'saas' não será acessível.
  */
 trait HasFilamentTenancy
 {
     use InteractsWithAccounts;
 
     /** Valores possíveis do status no pivot account_user */
-    public const MEMBERSHIP_ACTIVE   = 'active';
-    public const MEMBERSHIP_SUSPENDED = 'suspended';
-    public const MEMBERSHIP_INVITED   = 'invited';
+    public const MEMBERSHIP_ACTIVE = 'active';
 
+    public const MEMBERSHIP_SUSPENDED = 'suspended';
+
+    public const MEMBERSHIP_INVITED = 'invited';
 
     /**
      * Decide quem pode acessar cada painel do Filament.
      *
-     * - 'saas' (plataforma): somente por papéis de plataforma (HasPlatformRoles).
+     * - 'saas' (plataforma): controlado exclusivamente por papéis de plataforma (HasPlatformRoles).
      * - Demais painéis (tenant) são liberados aqui; a decisão fina vai para canAccessTenant().
      */
     public function canAccessPanel(Panel $panel): bool

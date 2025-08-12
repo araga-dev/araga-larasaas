@@ -71,6 +71,15 @@ O objetivo é fornecer uma base sólida, escalável e flexível, adequada para a
    - Pode pertencer a várias contas.
    - Se não associado a nenhuma conta, só verá um painel básico de perfil.
 
+### Papéis de plataforma
+- Controle do painel `/saas` é feito exclusivamente por papéis registrados em banco de dados.
+- **`platform_roles`**: tabela com campos `id`, `slug`, `name`, `description`, `created_at`, `updated_at`.
+- **`platform_role_user`**: pivot com `role_id`, `user_id`, `is_active` e timestamps; chave primária composta (`role_id`, `user_id`).
+- Papéis padrão:
+  - `platform_owner` – define os donos da plataforma.
+  - `support_agent` – identifica membros da equipe de suporte.
+- Atribuição ou remoção de papéis para administradores ocorre adicionando ou removendo registros em `platform_role_user` (ou marcando `is_active = 0`); não há controle por e-mails, apenas via banco.
+
 ---
 
 ## Estrutura de Painéis

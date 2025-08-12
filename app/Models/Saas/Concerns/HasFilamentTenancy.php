@@ -29,9 +29,9 @@ use Illuminate\Support\Collection;
  *   se o pivot tiver 'panels' (JSON), o painel atual deve estar permitido.
  *
  * Observações:
- * - Caso o User possua o trait HasPlatformRoles, este trait usará
- *   hasAnyPlatformRole([...]) para liberar o /saas.
- * - Sem esse trait, o painel 'saas' não será acessível.
+ * - Quando o modelo usa o trait `InteractsWithPlatformRoles`, este
+ *   trait chama `hasAnyPlatformRole([...])` para liberar o /saas.
+ * - Sem o trait de roles, o painel 'saas' não será acessível.
  */
 trait HasFilamentTenancy
 {
@@ -47,7 +47,7 @@ trait HasFilamentTenancy
     /**
      * Decide quem pode acessar cada painel do Filament.
      *
-     * - 'saas' (plataforma): controlado exclusivamente por papéis de plataforma (HasPlatformRoles).
+     * - 'saas' (plataforma): controlado exclusivamente por `PlatformRole`.
      * - Demais painéis (tenant) são liberados aqui; a decisão fina vai para canAccessTenant().
      */
     public function canAccessPanel(Panel $panel): bool

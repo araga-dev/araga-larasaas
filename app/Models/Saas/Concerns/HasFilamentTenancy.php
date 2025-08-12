@@ -21,7 +21,8 @@ use Illuminate\Support\Collection;
  *
  * Comportamento:
  * - canAccessPanel(): decide acesso aos painéis do Filament.
- *   - Painel 'saas' (plataforma): por papéis de plataforma OU por e-mails em config.
+ *   - Painel 'saas' (plataforma): acesso exclusivo por papéis de plataforma
+ *     (requer trait HasPlatformRoles).
  *   - Painéis tenant (admin, comercial, financeiro, producao): liberados aqui;
  *     a verificação real ocorre em canAccessTenant().
  *
@@ -30,8 +31,8 @@ use Illuminate\Support\Collection;
  *   se o pivot tiver 'panels' (JSON), o painel atual deve estar permitido.
  *
  * Observações:
- * - Caso você tenha o trait HasPlatformRoles no User, este trait usará
- *   hasAnyPlatformRole([...]) para liberar o /saas. Se não houver, cai no fallback por config.
+ * - Este trait delega o acesso ao painel /saas para helpers de papéis de plataforma
+ *   fornecidos por HasPlatformRoles. Sem esse trait, o método retornará false.
  */
 trait HasFilamentTenancy
 {
@@ -46,8 +47,7 @@ trait HasFilamentTenancy
     /**
      * Decide quem pode acessar cada painel do Filament.
      *
-     * - 'saas' (plataforma): preferencialmente por papéis de plataforma (HasPlatformRoles),
-     *   senão por fallback de e-mails na configuração.
+     * - 'saas' (plataforma): somente por papéis de plataforma (HasPlatformRoles).
      * - Demais painéis (tenant) são liberados aqui; a decisão fina vai para canAccessTenant().
      */
     public function canAccessPanel(Panel $panel): bool
@@ -55,9 +55,7 @@ trait HasFilamentTenancy
         $panelId = $panel->getId();
 
         if ($panelId === 'saas') {
-            // 1) Se o User tiver helpers de papéis de plataforma, use-os:
             if (method_exists($this, 'hasAnyPlatformRole')) {
-                // Ajuste a lista conforme seus papéis de plataforma
                 return $this->hasAnyPlatformRole([
                     'platform_owner',
                     'support_agent',
@@ -67,12 +65,7 @@ trait HasFilamentTenancy
                 ]);
             }
 
-            // 2) Fallback: e-mails definidos na config/env
-            $owners = collect(config('araga_saas.platform_owner_emails', []))
-                ->filter()
-                ->map(fn($e) => mb_strtolower(trim($e)));
-
-            return $owners->contains(mb_strtolower((string) $this->email));
+            return false;
         }
 
         // Para painéis tenant-aware (admin, comercial, financeiro, producao),

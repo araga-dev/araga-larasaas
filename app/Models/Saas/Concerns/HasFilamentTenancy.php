@@ -32,7 +32,6 @@ use Illuminate\Support\Collection;
  * Observações:
  * - Caso você tenha o trait HasPlatformRoles no User, este trait usará
  *   hasAnyPlatformRole([...]) para liberar o /saas. Se não houver, cai no fallback por config.
- * - Configure config/araga_saas.php com 'platform_owner_emails' quando não usar papéis de plataforma.
  */
 trait HasFilamentTenancy
 {

@@ -23,9 +23,14 @@ class AccountResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static string|UnitEnum|null $navigationGroup = 'Plataforma';
-
     protected static ?string $navigationLabel = 'Contas';
+    protected static ?string $label = 'Conta';
+    protected static ?string $navigationPluralLabel = 'Contas';
+    protected static ?string $pluralLabel = 'Contas';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Plataforma';
+
+    protected static ?int $navigationSort = 2;
 
 
     /** Só registra no menu se o usuário puder ver (Policy->viewAny) */

@@ -33,3 +33,7 @@ ALTER TABLE branches ADD COLUMN deleted_at TIMESTAMP NULL DEFAULT NULL;
 -- Adicione novas alterações abaixo deste marcador
 -- =====================================================================
 
+-- [2025-02-13 00:00] Autor: IA (ChatGPT)
+-- Contexto: Permitir bloqueio ou suspensão de usuários pela administração do SaaS.
+-- Impacto: Controle de acesso ao sistema pelos administradores.
+ALTER TABLE users ADD COLUMN is_active TINYINT(1) NOT NULL DEFAULT 1 AFTER password;

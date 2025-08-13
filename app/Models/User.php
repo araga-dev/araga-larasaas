@@ -4,23 +4,23 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-
 use App\Models\Saas\Concerns\HasFilamentTenancy;
 use App\Models\Saas\Concerns\InteractsWithPlatformRoles;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasTenants;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements FilamentUser, HasTenants
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
 
-    use Notifiable;
-    use InteractsWithPlatformRoles;
     use HasFilamentTenancy;
+    use InteractsWithPlatformRoles;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,6 +31,7 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         'name',
         'email',
         'password',
+        'is_active',
     ];
 
     /**
@@ -53,6 +54,24 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_active' => 'boolean',
         ];
+    }
+
+    public function ownedAccounts(): BelongsToMany
+    {
+        return $this->accounts()->wherePivot('is_owner', true);
+    }
+
+    public function adminAccounts(): BelongsToMany
+    {
+        return $this->accounts()->wherePivot('is_admin', true);
+    }
+
+    public function memberAccounts(): BelongsToMany
+    {
+        return $this->accounts()
+            ->wherePivot('is_owner', false)
+            ->wherePivot('is_admin', false);
     }
 }

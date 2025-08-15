@@ -13,7 +13,7 @@ class Branch extends Model
     protected $table = 'branches';
 
     protected $fillable = [
-        'account_id',
+        'organization_id',
         'name',
         'code',
         'parent_id',
@@ -28,9 +28,9 @@ class Branch extends Model
     ];
 
     // --- Relationships ---
-    public function account()
+    public function organization()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(Organization::class);
     }
 
     public function parent()
@@ -65,16 +65,16 @@ class Branch extends Model
     protected static function booted(): void
     {
         static::saving(function (Branch $b) {
-            // normaliza: 0/false -> null (evita colisão no UNIQUE (account_id, is_primary))
+            // normaliza: 0/false -> null (evita colisão no UNIQUE (organization_id, is_primary))
             if (! $b->is_primary) {
                 $b->is_primary = null;
             }
 
-            // se tiver pai, precisa ser da mesma conta
+            // se tiver pai, precisa ser da mesma organização
             if ($b->parent_id) {
-                $parent = static::query()->select('account_id')->find($b->parent_id);
-                if (! $parent || $parent->account_id !== (int) $b->account_id) {
-                    throw new \RuntimeException('Parent branch must belong to the same account.');
+                $parent = static::query()->select('organization_id')->find($b->parent_id);
+                if (! $parent || $parent->organization_id !== (int) $b->organization_id) {
+                    throw new \RuntimeException('Parent branch must belong to the same organization.');
                 }
             }
         });

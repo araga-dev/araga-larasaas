@@ -5,8 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Gate;
-use App\Models\Saas\Account;
-use App\Models\Saas\Policies\AccountPolicy;
+use App\Models\Saas\Organization;
+use App\Models\Saas\Policies\OrganizationPolicy;
 
 class SaasServiceProvider extends ServiceProvider
 {
@@ -31,6 +31,6 @@ class SaasServiceProvider extends ServiceProvider
         # config\database.php -> 'engine' =>  env('DB_ENGINE', null),
         # .env -> DB_ENGINE=InnoDB
 
-        Gate::policy(Account::class, AccountPolicy::class);
+        Gate::policy(Organization::class, OrganizationPolicy::class);
     }
 }

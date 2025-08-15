@@ -58,19 +58,19 @@ class User extends Authenticatable implements FilamentUser, HasTenants
         ];
     }
 
-    public function ownedAccounts(): BelongsToMany
+    public function ownedOrganizations(): BelongsToMany
     {
-        return $this->accounts()->wherePivot('is_owner', true);
+        return $this->organizations()->wherePivot('is_owner', true);
     }
 
-    public function adminAccounts(): BelongsToMany
+    public function adminOrganizations(): BelongsToMany
     {
-        return $this->accounts()->wherePivot('is_admin', true);
+        return $this->organizations()->wherePivot('is_admin', true);
     }
 
-    public function memberAccounts(): BelongsToMany
+    public function memberOrganizations(): BelongsToMany
     {
-        return $this->accounts()
+        return $this->organizations()
             ->wherePivot('is_owner', false)
             ->wherePivot('is_admin', false);
     }

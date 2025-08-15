@@ -19,18 +19,16 @@ use Illuminate\Database\Eloquent\Builder;
 
 class AccountResource extends Resource
 {
-    protected static $model = Organization::class;
+    protected static ?string $model = Organization::class;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBuildingOffice;
+    protected static ?string $navigationLabel = 'Dashboard';
+    protected static ?string $label = 'Dashboard';
+    protected static ?string $navigationPluralLabel = 'Dashboard';
+    protected static ?string $pluralLabel = 'Dashboard';
 
-    protected static $navigationIcon = Heroicon::OutlinedBuildingOffice;
+    protected static string|\UnitEnum|null $navigationGroup = 'Plataforma';
 
-    protected static $navigationLabel = 'Minha Conta';
-    protected static $label = 'Minha Conta';
-    protected static $navigationPluralLabel = 'Minha Conta';
-    protected static $pluralLabel = 'Minha Conta';
-
-    protected static $navigationGroup = 'Plataforma';
-
-    protected static $navigationSort = 1;
+    protected static ?int $navigationSort = 1;
 
     /*public static function shouldRegisterNavigation(): bool
     {

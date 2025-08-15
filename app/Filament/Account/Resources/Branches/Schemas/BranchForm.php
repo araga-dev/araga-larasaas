@@ -13,13 +13,23 @@ class BranchForm
     {
         return $schema
             ->components([
-                TextInput::make('name')->label('Nome')->required(),
-                TextInput::make('code')->label('Código')->maxLength(50),
+                TextInput::make('name')
+                    ->label('Nome')
+                    ->required()
+                    ->helperText('Ex: Matriz, Filial SP'),
+                TextInput::make('code')
+                    ->label('Código')
+                    ->maxLength(50)
+                    ->helperText('Código interno opcional'),
                 Select::make('parent_id')
                     ->label('Filial superior')
                     ->relationship('parent', 'name')
-                    ->nullable(),
-                Toggle::make('is_active')->label('Ativa')->default(true),
+                    ->nullable()
+                    ->helperText('Use para definir hierarquia entre filiais'),
+                Toggle::make('is_active')
+                    ->label('Ativa')
+                    ->default(true)
+                    ->helperText('Filiais inativas não estarão disponíveis'),
             ]);
     }
 }

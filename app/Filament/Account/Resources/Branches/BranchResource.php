@@ -22,6 +22,15 @@ class BranchResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationLabel = 'Filiais';
+    protected static ?string $label = 'Filial';
+    protected static ?string $navigationPluralLabel = 'Filiais';
+    protected static ?string $pluralLabel = 'Filiais';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'Plataforma';
+
+    protected static ?int $navigationSort = 3;
+
     public static function form(Schema $schema): Schema
     {
         return BranchForm::configure($schema);

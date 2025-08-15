@@ -20,6 +20,8 @@ class BranchesTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->heading('Filiais da conta')
+            ->description('Use filiais para organizar relatórios por unidade.')
             ->columns([
                 TextColumn::make('name')->label('Nome')->searchable()->sortable(),
                 TextColumn::make('code')->label('Código')->toggleable(),

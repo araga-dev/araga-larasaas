@@ -27,6 +27,8 @@ class FinanceiroPanelProvider extends PanelProvider
             ->id('financeiro')
             ->path('painel/financeiro')
             ->brandName('Financeiro')
+            ->topNavigation()
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])

@@ -27,6 +27,8 @@ class ProducaoPanelProvider extends PanelProvider
             ->id('producao')
             ->path('painel/producao')
             ->brandName('Produção')
+            ->topNavigation()
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])

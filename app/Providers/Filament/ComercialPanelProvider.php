@@ -27,6 +27,8 @@ class ComercialPanelProvider extends PanelProvider
             ->id('comercial')
             ->path('painel/comercial')
             ->brandName('Comercial')
+            ->topNavigation()
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])

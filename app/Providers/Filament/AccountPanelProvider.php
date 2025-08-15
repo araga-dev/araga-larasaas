@@ -26,6 +26,8 @@ class AccountPanelProvider extends PanelProvider
             ->id('account')
             ->path('account')
             ->brandName('Minha Conta')
+            ->topNavigation()
+            ->login()
             ->colors([
                 'primary' => Color::Amber,
             ])
